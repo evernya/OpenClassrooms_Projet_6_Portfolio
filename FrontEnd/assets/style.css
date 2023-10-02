@@ -125,7 +125,7 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
-.gallery {
+#gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
@@ -133,10 +133,39 @@ li:hover {
 	grid-row-gap: 20px;
 }
 
-.gallery img {
+#gallery img {
 	width: 100%;
 
 }
+
+#filtre{
+	display: flex;
+    justify-content: center;
+	margin: 60px 0;
+}
+
+.btn{
+    height: 2.3125rem;
+    margin: 0 5px;
+	padding: 0 15px;
+
+    background-color: transparent;
+	border-radius: 3.75rem;
+	border: 1px solid #1D6154; 
+
+	color: #1D6154;
+    font-family: Syne;
+	font-size: 1rem;
+	font-weight: 700;
+
+    cursor: pointer;
+}
+
+.btnSelected{
+	background-color: #1D6154;
+	color: #ffffff;
+}
+
 #contact {
 	width: 50%;
 margin: auto;
