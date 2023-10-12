@@ -162,8 +162,18 @@ li:hover {
 }
 
 .btnSelected{
+	height: 2.3125rem;
+    margin: 0 5px;
+	padding: 0 15px;
+	border-radius: 3.75rem;
+	font-family: Syne;
+	font-size: 1rem;
+	font-weight: 700;
+	border: 1px solid #1D6154; 
+	
 	background-color: #1D6154;
 	color: #ffffff;
+	cursor: pointer;
 }
 
 #contact {

@@ -1,96 +1,92 @@
 //faire appel à l'API
-const url = "http://localhost:5678/api/works"
+const urlWorks = "http://localhost:5678/api/works"
+const urlCategory = "http://localhost:5678/api/categories"
+
+let projetAll ;
 
 //Afficher les projets dynamiquement
 const getGallery = () => {
-    fetch(url)
+    fetch(urlWorks)
     .then(function (res){
-        return res.json()
+        return res.json();
     })
-
-    .then(function (data) {
-
-        data.map((works) => {
-            //création de la balise figure
-            let figure = document.createElement("figure");
-            //remplacement des données dans les balises
-            figure.innerHTML += `<figure>
-                                <img src="${works.imageUrl}" alt="Abajour Tahina">
-                                <figcaption>${works.title}</figcaption>
-                                </figure>`
-
-            //balise figure mise dans l'id gallery
-            document.getElementById("gallery").appendChild(figure);
-        })
-
-        return data;
+    .then(function (dataProjets){
+        projetAll = dataProjets;
+        projets(dataProjets);
     })
-    .then(function (data){
+}
 
-        data.map((item) => {
-            // console.log(item.category.name)
-            //création du bouton
-            let button = document.createElement("button");
-            button.classList.add("btn")
-            button.innerText = `${item.category.name}`
+function projets(dataProjets){
 
-            document.getElementById("filtre").appendChild(button)
+    let divGallery = document.getElementById("gallery");
+    divGallery.innerHTML = "";
 
-            let filtres = [...new Set(button)];
-            console.log(button)
+    dataProjets.map((works) => {
+        //création de la balise figure
+        let figure = document.createElement("figure");
+        //remplacement des données dans les balises
+        figure.innerHTML += `<figure>
+                            <img src="${works.imageUrl}" alt="Abajour Tahina">
+                            <figcaption>${works.title}</figcaption>
+                            </figure>`
 
-            // for (filtre in data){
-        // //    console.log(filtre.cat)
-        //     //création du bouton
-        //     let button = document.createElement("button");
-        //     button.classList.add("btn")
-        //     button.innerText = `${filtre.name}`
-     
+        //balise figure mise dans l'id gallery
+        document.getElementById("gallery").appendChild(figure);
+    })
+}
 
-        //     document.getElementById("filtre").appendChild(button)
-        // }
-        })        
+//affiche le filtre
+const getFiltre = () => {
+    fetch(urlCategory)
+    .then(function (res){
+        return res.json();
+    })
+    .then(function (dataFiltre){
+        filtre(dataFiltre);
     })
 }
 
 
-    //filtre
-//affiche les éléments filtrés
-//cache les éléments non sélectionnés
-//active le btn selected
+function filtre(dataFiltre){
+    // création du bouton tous
+    let buttonTous = document.createElement("button")
+    buttonTous.classList.add("btn")
+    buttonTous.innerText = "Tous";
 
-// function first(data) {
-//     for (works in data){
-//         //création de la balise figure
-//         let figure = document.createElement("figure");
-//         //remplacement des données dans les balises
-//         figure.innerHTML += `<figure>
-//                             <img src="${data[works].imageUrl}" alt="Abajour Tahina">
-//                             <figcaption>${data[works].title}</figcaption>
-//                             </figure>`
+    document.getElementById("filtre").appendChild(buttonTous)
 
-//         //balise figure mise dans l'id gallery
-//         document.getElementById("gallery").appendChild(figure);
-        
-//         return data;
-//     }
-// }
+    buttonTous.addEventListener("click", () =>{
+        projets(projetAll);
+    })
+
+    dataFiltre.map((item) => {
+        //création des boutons category
+        let button = document.createElement("button");
+        button.classList.add("btn")
+        button.innerText = `${item.name}`
+
+        document.getElementById("filtre").appendChild(button)
+
+        button.addEventListener("click", () =>{
+            let filterProjets = projetAll.filter(fil => fil.category.name === item.name);   
+            projets(filterProjets);
+        })
+    })        
+}
 
 
-// //Afficher les projets dynamiquement
-// const getGallery = () => {
-//     fetch(url)
-//     .then(function (res){
-//         return res.json()
-//         const jsonData = res.json()
-//         const newData = first(data)
-//     })
-// }
-
+//appelle de la fonction getFiltre
+getFiltre()
 //appelle de la fonction getGallery
 getGallery()
 
 
 
-
-
+// for (filtre in data){
+    // //    console.log(filtre.cat)
+    //     //création du bouton
+    //     let button = document.createElement("button");
+    //     button.classList.add("btn")
+    //     button.innerText = `${filtre.name}`
+    //     document.getElementById("filtre").appendChild(button)
+    // }
