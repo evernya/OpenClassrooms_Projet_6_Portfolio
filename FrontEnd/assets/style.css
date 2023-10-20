@@ -28,11 +28,17 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
+}
+a {
+	text-decoration: none;
+	color: #000;
 }
 blockquote, q {
 	quotes: none;
@@ -75,7 +81,6 @@ h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -162,15 +167,6 @@ li:hover {
 }
 
 .btnSelected{
-	height: 2.3125rem;
-    margin: 0 5px;
-	padding: 0 15px;
-	border-radius: 3.75rem;
-	font-family: Syne;
-	font-size: 1rem;
-	font-weight: 700;
-	border: 1px solid #1D6154; 
-	
 	background-color: #1D6154;
 	color: #ffffff;
 	cursor: pointer;
@@ -217,6 +213,55 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+}
+
+#login {
+	width: 50%;
+	margin: auto;
+}
+#login > * {
+	text-align: center;
+
+}
+#login h2{
+	margin-bottom: 20px;
+}
+#login form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+#login input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+	margin: 2em 0 1em 0;
+}
+
+#login p {
+	text-decoration: underline;
+}
+
+
+footer{
+	background-color: #fff;
+}
+
+.footerLogin{
+	position: fixed;
+	bottom: 0; 
+	left: 0;
+	width: 100%;
+}
+
+footer nav{
+	display: flex;
+  	justify-content: flex-end;
+  	align-items: center;
 }
 
 footer nav ul {

@@ -1,46 +1,94 @@
+//faire appel à l'API
+const urlWorks = "http://localhost:5678/api/works"
 const urlCategory = "http://localhost:5678/api/categories"
 
+let projetAll ; //variable qui contiendra tous les projets
+
+//Afficher les projets dynamiquement
+const getGallery = () => {
+    fetch(urlWorks)
+    .then(function (res){
+        return res.json();
+    })
+    .then(function (dataProjets){
+        projetAll = dataProjets;
+        projets(dataProjets);
+    })
+}
+
+function projets(dataProjets){
+
+    let divGallery = document.getElementById("gallery");
+    divGallery.innerHTML = "";
+
+    dataProjets.map((works) => {
+        //création de la balise figure
+        let figure = document.createElement("figure");
+        //remplacement des données dans les balises
+        figure.innerHTML += `<figure>
+                            <img src="${works.imageUrl}" alt="Abajour Tahina">
+                            <figcaption>${works.title}</figcaption>
+                            </figure>`
+
+        //balise figure mise dans l'id gallery
+        document.getElementById("gallery").appendChild(figure);
+    })
+}
+
+//affiche le filtre
 const getFiltre = () => {
     fetch(urlCategory)
     .then(function (res){
         return res.json();
     })
-    .then(function (data){
-        filtre(data);
+    .then(function (dataFiltre){
+        filtre(dataFiltre);
     })
 }
 
-function filtre(data){
-    console.log(data)
-    data.map((item) => {
-        //création du bouton
-        let button = document.createElement("button");
-        button.classList.add("btn")
-        button.innerText = `${item.name}`
+function filtre(dataFiltre){
+    // création du bouton tous
+    let buttonTous = document.createElement("button")
+    buttonTous.classList.add("btn", "btnSelected")
+    buttonTous.innerText = "Tous";
 
-        document.getElementById("filtre").appendChild(button)
+    document.getElementById("filtre").appendChild(buttonTous)
 
-        
+    buttonTous.addEventListener("click", () =>{
+        projets(projetAll);
 
-        // for (filtre in data){
-    // //    console.log(filtre.cat)
-    //     //création du bouton
-    //     let button = document.createElement("button");
-    //     button.classList.add("btn")
-    //     button.innerText = `${filtre.name}`
- 
+        changeBtnSelected();
+        addBtnSelected(buttonTous, "btnSelected");
+    })
 
-    //     document.getElementById("filtre").appendChild(button)
-    // }
-    
-    })        
+    dataFiltre.map((item) => {
+        //création des boutons category
+        let buttonCategory = document.createElement("button");
+        buttonCategory.classList.add("btn")
+        buttonCategory.innerText = `${item.name}`
+
+        document.getElementById("filtre").appendChild(buttonCategory)
+
+        buttonCategory.addEventListener("click", () =>{
+            let filterProjets = projetAll.filter(fil => fil.category.name === item.name);   
+            projets(filterProjets);
+
+            changeBtnSelected();
+            addBtnSelected(buttonCategory, "btnSelected");
+        })   
+    })
 }
 
-//appelle de la fonction getGallery
+function addBtnSelected(btn, classe){
+    btn.classList.add(classe)
+}
+
+function changeBtnSelected(){
+    let classeBtnSelected = document.querySelector(".btnSelected")
+    classeBtnSelected.classList.remove("btnSelected")
+}
+
+//appelle de la fonction getFiltre
 getFiltre()
-
-
-//     //filtre
-// //affiche les éléments filtrés
-// //cache les éléments non sélectionnés
-// //active le btn selected
+//appelle de la fonction getGallery
+getGallery()
