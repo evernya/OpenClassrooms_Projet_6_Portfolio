@@ -1,67 +1,124 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
+
 <body>
-<header>
-	<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
-	<nav>
-		<ul>
-			<a href="#portfolio"><li>projets</li></a>
-			<a href="#contact"><li>contact</li></a>
-			<a href="login.html"><li>login</li></a>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
-</header>
-<main>
-	<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
-	</section>
-	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div id="filtre"></div>
-		<div id="gallery"></div>
-	</section>
-	<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
-		</form>
-	</section>
-</main>
+	<div class="editionMode"><p><i class="fa-regular fa-pen-to-square" id="fa-pen-up"></i>Mode édition</p></div>
+	<header>
+		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
+		<nav>
+			<ul>
+				<a href="#portfolio"><li>projets</li></a>
+				<a href="#contact"><li>contact</li></a>
+				<a href="login.html"><li id="login">login</li></a>
+				<a href="#"><li id="logout">log out</li></a>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</header>
 
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
+	<main>
+		<section id="introduction">
+			<figure><img src="./assets/images/sophie-bluel.png" alt=""></figure>
+			<article>
+				<h2>Designer d'espace</h2>
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+					couleurs dans le respect de l'esprit des lieux et le choix adapté des matériaux. Le suivi du
+					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
+			</article>
+		</section>
 
-<script src = "javascript/filtre.js"></script>
+		<section id="portfolio">
+			<div class="portfolioTitreContainer">
+				<h2>Mes Projets</h2>
+				<div class="modalBtnOpen"><button class="edit"><i class="fa-regular fa-pen-to-square"></i>modifier</button></div>
+			</div>
+			<div id="filter"></div>
+			<div id="gallery"></div>
+		</section>
+
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+	</main>
+
+	<footer>
+		<nav>
+			<ul><li>Mentions Légales</li></ul>
+		</nav>
+	</footer>
+
+	<aside class="modal">
+
+		<div class="modalContainer" id="modal1">
+			<button class="modalBtnClose"><i class="fa-solid fa-xmark"></i></button>
+			<h3>Galerie photo</h3>
+			<div id="modalGallery"></div>
+			<div class="modalSeparator"><button type="submit" class="modalBtnNextModal">Ajouter une photo</button></div>
+		</div>
+
+		<div class="modalContainer" id="modal2">
+			<div>
+				<button class="modalBtnReturn"><i class="fas fa-arrow-left"></i></button>
+				<button class="modalBtnClose"><i class="fa-solid fa-xmark"></i></button>
+			</div>
+
+			<h3>Ajout photo</h3>
+
+			<form id="modalForm" action="#" method="post" enctype="multipart/form-data">
+				<div class="cadrePhoto">
+					<i class="fa-regular fa-image"></i>
+					<label for="inputUploadPhoto" id="labelUploadPhoto">+ Ajouter photo</label>
+					<input type="file" name="inputUploadPhoto" id="inputUploadPhoto" accept="image/*" multiple>
+					<img class="downloadedPhoto" src="" alt="image">
+					<p class="cadrePhotoText">jpg, png : 4mo max</p>
+				</div>
+
+				<div class="fieldAddPicture">
+					<label for="title">Titre</label>
+					<input type="text" name="title" id="titleAddPic">
+					<label for="categorie">Catégorie</label>
+					<select name="categorie" id="categorieAddPic"></select>
+				</div>
+
+				<div class="modalSeparator modalSeparatorForm"><button type="submit" class="modalBtnValidate">Valider</button></div>
+			</form>
+		</div>
+	</aside>
+
+	<script type="text/javascript" src="./javascript/projets.js"></script>
+	<script type="text/javascript" src="./javascript/filter.js"></script>
+	<script type="text/javascript" src ="./javascript/logout.js"></script>
+	<script type="text/javascript" src="./javascript/maj-interface.js"></script>
+	<script type="text/javascript" src="./javascript/modal-open-close.js"></script>
+	<script type="text/javascript" src="./javascript/remove-projet.js"></script>
+	<script type="text/javascript" src="./javascript/add-projet.js"></script>
 </body>
+
 </html>
