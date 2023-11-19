@@ -140,6 +140,7 @@ function formModalSubmit() {
         modal.style.display = "none";
         firstModal.style.display = "none";
         secondModal.style.display = "none";
+        modalBtnValidate.classList.remove("enabled");
         resetForm();
     })
     .catch((error) => {
